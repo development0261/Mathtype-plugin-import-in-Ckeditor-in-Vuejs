@@ -1,5 +1,8 @@
 <template>
   <div class="hello">
+    <div>
+      <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+    </div>
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -31,12 +34,29 @@
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+  import MathType from '@wiris/mathtype-ckeditor5/src/plugin'
+  export default {
+    name: 'HelloWorld',
+    props: {
+      msg: String
+    },
+    data() {
+      return {
+        editor: ClassicEditor,
+        editorData: '<p>Content of the editor.</p>',
+        editorConfig: {
+          plugins: [
+          MathType,
+        ],
+        toolbar: {
+          items: [
+            'MathType'
+          ]
+        }
+      };
+    }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
